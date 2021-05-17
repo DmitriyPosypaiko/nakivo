@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <main>
+        {% block content %}
+            <form type="get" action="#" style="margin: 0">
+                {% csrf_token %}
+            <label>Products:-</label>
+                <input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
+                <button id="search_submit" type="submit" >Submit</button>
+            </form>
+            <h1>Search Results</h1>
+            {% for product in object_list %}
+                 <img src="/media/{{ product.image }} " width="500px" height="300px"  alt="...">
+                  {{ product.name }} {{ product.author }}<br>
+
+            {% endfor %}
+    {% endblock %}
+    </main>
+</body>
+</html>

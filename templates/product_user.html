@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <title>Hello, world!</title>
+
+</head>
+<body>
+    <main>
+        {% block content %}
+            <div class="py-4">
+                <div class="container">
+                    <div class="row hidden-md-up">
+                        {% if products %}
+                            {% for product in products %}
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img class="card-block">
+                                            <a href="{% url 'productdetail' product.id %}">
+                                                <img src="/media/{{ product.image }}" class="card-img-top" alt="..." width="50%" height="50%">
+                                            </a>
+                                            <div class="card-img-top">
+                                                <h5 class="card-title">{{ product.name }}</h5>
+                                                <p class="card-text p-y-1">{{ product.description }}</p>
+                                                <p class="card-text p-y-1"><small class="text-muted">updated {{ product.updated }}</small></p>
+                                              {% if user.is_authenticated %}
+{#                                                <a href="{% url 'product_update/' product.id %}">update</a>#}
+                                                <br>
+                                              {% endif %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No polls are available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+</body>
